@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/supabase'
-import { City, Edit, Trash2, Plus } from 'lucide-react'
+import { Building, Edit, Trash2, Plus } from 'lucide-react'
 
 interface CityData {
   id: number
@@ -149,7 +149,7 @@ export default function CitiesPage() {
           <div className="mb-8 flex justify-between items-center">
             <div>
               <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
-                <City className="w-8 h-8" />
+                <Building className="w-8 h-8" />
                 城市管理
               </h1>
               <p className="text-gray-600 mt-2">管理各城市的社保公积金标准</p>
