@@ -196,7 +196,7 @@ export async function getAvailableCities(): Promise<string[]> {
   }
 
   // 去重
-  const cities = [...new Set(data?.map(city => city.city_name))]
+  const cities = [...new Set(data?.map((city: any) => city.city_name))]
   return cities
 }
 
@@ -212,6 +212,6 @@ export async function getAvailableYears(): Promise<string[]> {
   }
 
   // 去重
-  const years = [...new Set(data?.map(item => item.year))]
+  const years = [...new Set(data?.map((item: any) => item.year))]
   return years
 }
