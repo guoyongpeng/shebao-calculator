@@ -55,7 +55,7 @@ export async function getEmployeeSalariesByYear(year: string): Promise<EmployeeS
   // 按员工分组并计算平均工资
   const employeeMap = new Map<string, { total: number; count: number }>()
 
-  salaries.forEach(salary => {
+  salaries.forEach((salary: any) => {
     const name = salary.employee_name
     const amount = salary.salary_amount
 
