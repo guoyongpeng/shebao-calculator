@@ -1,42 +1,27 @@
-'use client'
-
 export default function DebugPage() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'Not found'
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'Found' : 'Not found'
-
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">环境变量调试页面</h1>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>环境变量调试页面</h1>
 
-        <div className="bg-white rounded-lg shadow p-6 mb-4">
-          <h2 className="text-xl font-semibold mb-4">环境变量检查</h2>
+      <div style={{ background: '#f5f5f5', padding: '15px', margin: '10px 0', borderRadius: '5px' }}>
+        <h2>页面加载测试</h2>
+        <p>如果你能看到这个页面，说明路由工作正常。</p>
+        <p>时间：{new Date().toLocaleString()}</p>
+      </div>
 
-          <div className="space-y-2">
-            <div className="border-b pb-2">
-              <span className="font-medium">NEXT_PUBLIC_SUPABASE_URL:</span>
-              <span className="ml-2 text-blue-600">{supabaseUrl}</span>
-            </div>
+      <div style={{ background: '#fff3cd', border: '1px solid #ffeaa7', padding: '15px', margin: '10px 0', borderRadius: '5px' }}>
+        <h2>环境变量状态</h2>
+        <p>由于安全限制，浏览器无法直接访问服务端环境变量。</p>
+        <p>请访问 API 端点来测试： <a href="/api/test-supabase" style={{ color: '#0066cc' }}>查看环境变量状态</a></p>
+      </div>
 
-            <div className="border-b pb-2">
-              <span className="font-medium">NEXT_PUBLIC_SUPABASE_ANON_KEY:</span>
-              <span className={`ml-2 ${supabaseKey === 'Found' ? 'text-green-600' : 'text-red-600'}`}>
-                {supabaseKey}
-              </span>
-            </div>
-
-            <div className="border-b pb-2">
-              <span className="font-medium">NODE_ENV:</span>
-              <span className="ml-2">{process.env.NODE_ENV}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <p className="text-sm text-yellow-800">
-            <strong>注意：</strong>这个页面仅用于调试，包含敏感信息，请不要在生产环境中暴露。
-          </p>
-        </div>
+      <div style={{ background: '#d4edda', border: '1px solid #c3e6cb', padding: '15px', margin: '10px 0', borderRadius: '5px' }}>
+        <h2>测试步骤</h2>
+        <ol>
+          <li>点击上面的链接测试API端点</li>
+          <li>检查返回的JSON数据中的环境变量状态</li>
+          <li>如果环境变量缺失，请检查Vercel设置</li>
+        </ol>
       </div>
     </div>
   )
