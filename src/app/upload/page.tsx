@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Upload, FileText, Calculator, Eye } from 'lucide-react'
 import { parseCitiesExcel, parseSalariesExcel } from '@/lib/excelParser'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 import { calculateContributions, saveCalculationResults, getAvailableCities, getAvailableYears } from '@/lib/calculations'
 
 export default function UploadPage() {
@@ -39,7 +39,7 @@ export default function UploadPage() {
       const cityData = await parseCitiesExcel(file)
 
       // 检查重复数据
-      const { data: existingData, error: fetchError } = await supabase
+      const { data: existingData, error: fetchError } = await getSupabase()
         .from('cities')
         .select('city_name, year')
         .in(
@@ -70,7 +70,7 @@ export default function UploadPage() {
         })
       } else {
         // 只上传新数据
-        const { error } = await supabase
+        const { error } = await getSupabase()
           .from('cities')
           .insert(newCityData)
 
@@ -103,7 +103,7 @@ export default function UploadPage() {
 
       // 检查重复数据（根据employee_id和month）
       const employeeMonthPairs = salaryData.map(s => `(${s.employee_id},${s.month})`)
-      const { data: existingData, error: fetchError } = await supabase
+      const { data: existingData, error: fetchError } = await getSupabase()
         .from('salaries')
         .select('employee_id, month')
         .or(
@@ -133,7 +133,7 @@ export default function UploadPage() {
         })
       } else {
         // 只上传新数据
-        const { error } = await supabase
+        const { error } = await getSupabase()
           .from('salaries')
           .insert(newSalaryData)
 

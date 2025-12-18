@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 import { Building, Edit, Trash2, Plus } from 'lucide-react'
 
 interface CityData {
@@ -32,7 +32,7 @@ export default function CitiesPage() {
   const loadCities = async () => {
     setLoading(true)
     try {
-      const { data, error } = await supabase
+      const { data, error } = await getSupabase()
         .from('cities')
         .select('*')
         .order('city_name', { ascending: true })
@@ -103,7 +103,7 @@ export default function CitiesPage() {
 
       if (editingCity) {
         // 更新
-        const { error } = await supabase
+        const { error } = await getSupabase()
           .from('cities')
           .update(saveData)
           .eq('id', editingCity.id)
@@ -111,7 +111,7 @@ export default function CitiesPage() {
         if (error) throw error
       } else {
         // 新增
-        const { error } = await supabase
+        const { error } = await getSupabase()
           .from('cities')
           .insert(saveData)
 
@@ -130,7 +130,7 @@ export default function CitiesPage() {
     if (!confirm('确定要删除这条记录吗？')) return
 
     try {
-      const { error } = await supabase
+      const { error } = await getSupabase()
         .from('cities')
         .delete()
         .eq('id', id)

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 
 interface City {
   id: number
@@ -51,7 +51,7 @@ export default function TestPage() {
       setError(null)
 
       // 获取 cities 表数据
-      const { data: citiesData, error: citiesError } = await supabase
+      const { data: citiesData, error: citiesError } = await getSupabase()
         .from('cities')
         .select('*')
         .order('created_at', { ascending: false })
@@ -59,7 +59,7 @@ export default function TestPage() {
       if (citiesError) throw citiesError
 
       // 获取 salaries 表数据
-      const { data: salariesData, error: salariesError } = await supabase
+      const { data: salariesData, error: salariesError } = await getSupabase()
         .from('salaries')
         .select('*')
         .order('created_at', { ascending: false })
@@ -67,7 +67,7 @@ export default function TestPage() {
       if (salariesError) throw salariesError
 
       // 获取 results 表数据
-      const { data: resultsData, error: resultsError } = await supabase
+      const { data: resultsData, error: resultsError } = await getSupabase()
         .from('results')
         .select('*')
         .order('calculation_date', { ascending: false })

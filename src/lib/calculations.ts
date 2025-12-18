@@ -1,4 +1,4 @@
-import { supabase } from './supabase'
+import { getSupabase } from './supabase'
 
 export interface CityStandard {
   city_name: string
@@ -25,7 +25,7 @@ export interface CalculationResult {
 }
 
 export async function getCityStandard(cityName: string, year: string): Promise<CityStandard | null> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('cities')
     .select('*')
     .eq('city_name', cityName)
@@ -42,7 +42,7 @@ export async function getCityStandard(cityName: string, year: string): Promise<C
 
 export async function getEmployeeSalariesByYear(year: string): Promise<EmployeeSalary[]> {
   // 获取指定年份的所有工资数据
-  const { data: salaries, error } = await supabase
+  const { data: salaries, error } = await getSupabase()
     .from('salaries')
     .select('*')
     .like('month', `${year}%`)
@@ -151,7 +151,7 @@ export async function saveCalculationResults(results: CalculationResult[]): Prom
   }))
 
   // 批量插入到results表
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from('results')
     .insert(insertData)
 
@@ -185,7 +185,7 @@ export async function getCalculationResults(cityName?: string, year?: string): P
 }
 
 export async function getAvailableCities(): Promise<string[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('cities')
     .select('city_name')
     .order('city_name')
@@ -201,7 +201,7 @@ export async function getAvailableCities(): Promise<string[]> {
 }
 
 export async function getAvailableYears(): Promise<string[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('cities')
     .select('year')
     .order('year', { ascending: false })
