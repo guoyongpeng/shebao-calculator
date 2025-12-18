@@ -161,7 +161,7 @@ export async function saveCalculationResults(results: CalculationResult[]): Prom
 }
 
 export async function getCalculationResults(cityName?: string, year?: string): Promise<any[]> {
-  let query = supabase
+  let query = getSupabase()
     .from('results')
     .select('*')
     .order('calculation_date', { ascending: false })
