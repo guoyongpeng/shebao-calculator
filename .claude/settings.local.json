@@ -18,7 +18,11 @@
       "Bash(ping:*)",
       "Bash(curl:*)",
       "Bash(nslookup:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(npm view:*)",
+      "Bash(npm update:*)",
+      "Bash(npm audit:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

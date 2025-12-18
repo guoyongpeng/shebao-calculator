@@ -54,7 +54,7 @@ export default function UploadPage() {
 
       // 过滤掉已存在的数据
       const existingKeys = new Set(
-        existingData?.map((item: any) => `${item.city_name}|${item.year}`) || []
+        (Array.isArray(existingData) ? existingData : []).map((item: any) => `${item.city_name}|${item.year}`)
       )
 
       const newCityData = cityData.filter(city =>
@@ -117,7 +117,7 @@ export default function UploadPage() {
 
       // 过滤掉已存在的数据
       const existingKeys = new Set(
-        existingData?.map((item: any) => `${item.employee_id}|${item.month}`) || []
+        (Array.isArray(existingData) ? existingData : []).map((item: any) => `${item.employee_id}|${item.month}`)
       )
 
       const newSalaryData = salaryData.filter(salary =>
